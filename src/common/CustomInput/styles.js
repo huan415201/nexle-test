@@ -9,10 +9,12 @@ const getStyles = () => {
       color: color.white1,
     },
     inputWrapper: {
-      flexDirection: 'row',
-      alignItems: 'center',
       borderBottomWidth: 1,
       borderBottomColor: color.blue1,
+    },
+    inputLine: {
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     input: {
       flex: 1,
@@ -24,7 +26,7 @@ const getStyles = () => {
     error: {
       fontSize: 12,
       color: color.red1,
-      marginTop: rHeight(8),
+      marginBottom: rHeight(8),
     },
     spacing: {
       height: rHeight(8),

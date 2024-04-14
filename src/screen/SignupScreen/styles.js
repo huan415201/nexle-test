@@ -8,14 +8,16 @@ const getStyles = () => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: color.black2,
+      backgroundColor: color.black0,
     },
     bg: {
       left: rWidth(-93),
     },
     backBtn: {
-      top: insets.top + rHeight(12),
-      left: rWidth(24),
+      marginTop: insets.top + rHeight(12),
+      marginLeft: rWidth(24),
+      width: 24,
+      height: 24,
     },
     gradientFilter: {
       position: 'absolute',
@@ -24,8 +26,9 @@ const getStyles = () => {
       paddingBottom: insets.bottom,
     },
     spaceView: {
-      top: insets.top + rHeight(280),
+      marginTop: rHeight(280),
       paddingHorizontal: rWidth(24),
+      flex: 1,
     },
     title: {
       fontSize: 22,
@@ -36,6 +39,33 @@ const getStyles = () => {
     },
     passwordWrapper: {
       marginTop: rHeight(16),
+    },
+    checkbox: {
+      marginTop: rHeight(50),
+    },
+    tos: {
+      fontSize: 12,
+      fontWeight: '500',
+      color: color.grey1,
+      lineHeight: 20,
+      marginTop: rHeight(30),
+    },
+    highlightTOS: {
+      color: color.blue1,
+    },
+    signupWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginTop: rHeight(30),
+    },
+    signupText: {
+      fontSize: 16,
+      fontWeight: '500',
+      color: color.white0,
+    },
+    noBorder: {
+      borderBottomWidth: 0,
     },
   });
 };
