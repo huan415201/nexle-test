@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { arrowButton, arrowLeft, eye, signupBg } from '../../asset/image';
 import CustomCheckbox from '../../common/CustomCheckbox';
 import CustomInput from '../../common/CustomInput';
+import { api } from '../../network';
 import color from '../../util/color';
 import { REGEX_EMAIL, regexTest } from '../../util/util';
 import PasswordLevel from './components/PasswordLevel';
