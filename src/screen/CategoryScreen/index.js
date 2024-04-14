@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useSelector } from 'react-redux';
 import { arrowLeft, categoryBg } from '../../asset/image';
 import { api } from '../../network';
 import color from '../../util/color';
@@ -64,7 +65,7 @@ const CategoryScreen = () => {
   };
 
   useEffect(() => {
-    if (!data) {
+    if (!data && !!token) {
       getData();
     }
   }, [token, data]);

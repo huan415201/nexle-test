@@ -12,8 +12,6 @@ import { useDispatch } from 'react-redux';
 import { arrowButton, arrowLeft, eye, signupBg } from '../../asset/image';
 import CustomCheckbox from '../../common/CustomCheckbox';
 import CustomInput from '../../common/CustomInput';
-import { setToken, setUserInfo } from '../../features/user/userSlice';
-import { api } from '../../network';
 import color from '../../util/color';
 import { REGEX_EMAIL, regexTest } from '../../util/util';
 import PasswordLevel from './components/PasswordLevel';
@@ -77,11 +75,11 @@ const SignUpScreen = ({ navigation }) => {
         console.log('responseLogin:::', responseLogin);
         dispatch(setUserInfo(responseLogin.user));
         dispatch(setToken(responseLogin.accessToken));
+        navigation.navigate('Category');
       }
     } catch (error) {
       console.log('error:::', error);
     }
-    navigation.navigate('Category');
   };
 
   return (
@@ -139,8 +137,7 @@ const SignUpScreen = ({ navigation }) => {
             <Text style={styles.signupText}>Sign Up</Text>
             <TouchableOpacity
               onPress={signup}
-              // disabled={!isOver16 || !!errorTextEmail || !!errorTextPassword}
-            >
+              disabled={!isOver16 || !!errorTextEmail || !!errorTextPassword}>
               <Image source={arrowButton} />
             </TouchableOpacity>
           </View>
