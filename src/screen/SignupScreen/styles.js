@@ -67,6 +67,11 @@ const getStyles = () => {
     noBorder: {
       borderBottomWidth: 0,
     },
+    error: {
+      fontSize: 12,
+      color: color.red1,
+      marginVertical: rHeight(8),
+    },
   });
 };
 

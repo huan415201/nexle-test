@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { arrowButton, arrowLeft, eye, signupBg } from '../../asset/image';
 import CustomCheckbox from '../../common/CustomCheckbox';
 import CustomInput from '../../common/CustomInput';
+import { setToken, setUserInfo } from '../../features/reduck/user/userSlice';
 import { api } from '../../network';
 import color from '../../util/color';
 import { REGEX_EMAIL, regexTest } from '../../util/util';
@@ -24,6 +25,7 @@ const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isOver16, setIsOver16] = useState(false);
+  const [errorSignup, setErrorSignup] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errorTextEmail, setErrorTextEmail] = useState('');
   const [errorTextPassword, setErrorTextPassword] = useState('');
@@ -56,30 +58,22 @@ const SignUpScreen = ({ navigation }) => {
   const handleShowPasswordLevel = () => setShowPasswordLevel(true);
 
   const signup = async () => {
-    try {
-      const res = await api.post('/auth/signup', {
-        firstName: 'Jamie',
-        lastName: 'Doe',
+    const signupRes = await api.post('/auth/signup', {
+      firstName: 'Jamie',
+      lastName: 'Doe',
+      email: email,
+      password: password,
+    });
+    if (signupRes?.status < 300) {
+      const loginRes = await api.post('/auth/signin', {
         email: email,
         password: password,
       });
-      const response = JSON.parse(res.data);
-      console.log('response:::', response);
-      if (response?.email && response?.password) {
-        console.log('before:::');
-        const loginRes = await api.post('/auth/signin', {
-          email: email,
-          password: password,
-        });
-        console.log('after:::');
-        const responseLogin = loginRes.data;
-        console.log('responseLogin:::', responseLogin);
-        dispatch(setUserInfo(responseLogin.user));
-        dispatch(setToken(responseLogin.accessToken));
-        navigation.navigate('Category');
-      }
-    } catch (error) {
-      console.log('error:::', error);
+      dispatch(setUserInfo(loginRes.data?.user));
+      dispatch(setToken(loginRes.data?.accessToken));
+      navigation.navigate('Category');
+    } else {
+      setErrorSignup(signupRes.data?.message || '');
     }
   };
 
@@ -134,6 +128,7 @@ const SignUpScreen = ({ navigation }) => {
             to the <Text style={styles.highlightTOS}>Terms of Service</Text> and{' '}
             <Text style={styles.highlightTOS}>Privacy Policy</Text>
           </Text>
+          {errorSignup ? <Text style={styles.error}>{errorSignup}</Text> : null}
           <View style={styles.signupWrapper}>
             <Text style={styles.signupText}>Sign Up</Text>
             <TouchableOpacity
